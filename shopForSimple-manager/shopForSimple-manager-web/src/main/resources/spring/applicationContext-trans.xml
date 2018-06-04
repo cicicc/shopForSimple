@@ -37,7 +37,7 @@ http://www.springframework.org/schema/util/spring-util-4.2.xsd">
     </tx:advice>
     <!--配置切面-->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* cn.indispensable.shopForSimple.service.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* cn.indispensable.shopForSimple.service.*.*(..))"/>
     </aop:config>
 
 

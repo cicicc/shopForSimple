@@ -52,4 +52,17 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <version>1.0.6</version>
         </dependency>
     </dependencies>
+    <!-- 如果不添加此节点 mybatis 的 mapper.xml 文件都不会在target目录下生成-->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>
