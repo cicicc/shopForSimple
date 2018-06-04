@@ -14,5 +14,8 @@
         <module name="shopForSimple-manager-web" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="shopForSimple-manager-web" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/shopForSimple-manager/shopForSimple-manager-web" />
+    <file type="web" url="file://$PROJECT_DIR$/shopForSimple-manager-web" />
+    <file type="web" url="file://$PROJECT_DIR$/shopForSimple-manager/shopForSimple-manager-service" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

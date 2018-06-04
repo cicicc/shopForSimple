@@ -16,7 +16,6 @@
         <module>shopForSimple-manager-dao</module>
         <module>shopForSimple-manager-interface</module>
         <module>shopForSimple-manager-service</module>
-        <module>shopForSimple-manager-web</module>
     </modules>
     <dependencies>
         <dependency>
