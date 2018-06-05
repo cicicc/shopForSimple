@@ -10,6 +10,7 @@
     <modules>
         <module>shopForSimple-common</module>
         <module>shopForSimple-manager</module>
+        <module>shopForSimple-manager-web</module>
     </modules>
     <packaging>pom</packaging>
     <!-- 集中定义依赖版本号 -->
@@ -31,7 +32,7 @@
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <commons-io.version>1.3.2</commons-io.version>
         <commons-net.version>3.3</commons-net.version>
-        <pagehelper.version>3.2.1</pagehelper.version>
+        <pagehelper.version>3.4.1</pagehelper.version>
         <jsqlparser.version>0.9.1</jsqlparser.version>
         <commons-fileupload.version>1.3.1</commons-fileupload.version>
         <jedis.version>2.7.2</jedis.version>
@@ -51,7 +52,7 @@
                 <artifactId>joda-time</artifactId>
                 <version>${joda-time.version}</version>
             </dependency>
-            <!-- Apache 工具组件 -->
+            <!-- Apache工具组件 -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
@@ -67,7 +68,7 @@
                 <artifactId>commons-net</artifactId>
                 <version>${commons-net.version}</version>
             </dependency>
-            <!-- Jackson Json 处理工具包 -->
+            <!-- Jackson Json处理工具包 -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
@@ -79,7 +80,7 @@
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
             </dependency>
-            <!-- quartz 任务调度框架 -->
+            <!-- quartz任务调度框架 -->
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
@@ -167,7 +168,7 @@
                 <artifactId>spring-context-support</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-            <!-- JSP 相关 -->
+            <!-- JSP相关 -->
             <dependency>
                 <groupId>jstl</groupId>
                 <artifactId>jstl</artifactId>
@@ -191,19 +192,19 @@
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons-fileupload.version}</version>
             </dependency>
-            <!-- Redis 客户端 -->
+            <!-- Redis客户端 -->
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
             </dependency>
-            <!-- solr 客户端 -->
+            <!-- solr客户端 -->
             <dependency>
                 <groupId>org.apache.solr</groupId>
                 <artifactId>solr-solrj</artifactId>
                 <version>${solrj.version}</version>
             </dependency>
-            <!-- dubbo 相关 -->
+            <!-- dubbo相关 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
@@ -229,8 +230,10 @@
                 <artifactId>freemarker</artifactId>
                 <version>${freemarker.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
+
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
@@ -243,7 +246,7 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!-- java 编译插件 -->
+            <!-- java编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -257,7 +260,7 @@
         </plugins>
         <pluginManagement>
             <plugins>
-                <!-- 配置 Tomcat 插件 -->
+                <!-- 配置Tomcat插件 -->
                 <plugin>
                     <groupId>org.apache.tomcat.maven</groupId>
                     <artifactId>tomcat7-maven-plugin</artifactId>
