@@ -19,11 +19,14 @@ http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <mvc:annotation-driven />
     <!--设置访问路径的前后缀-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="suffix" value="WEB-INF/jsp"/>
+        <property name="suffix" value="WEB-INF/jsp/"/>
         <property name="prefix" value=".jsp"/>
     </bean>
+    <!-- 配置资源映射 -->
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
     <!--引用dubbo服务-->
     <dubbo:application name="shopForSimple-manager-web"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.37.129:2181,192.168.37.129:2182,192.168.37.129:2183" />
+    <dubbo:registry protocol="zookeeper" address="192.168.37.129:2181" />
     <dubbo:reference interface="cn.indispensable.shopForSimple.service.ItemService" id="itemService"/>
 </beans>
