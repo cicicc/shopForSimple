@@ -23,6 +23,7 @@
     </properties>
 
     <dependencies>
+
         <!--去除对service层的依赖-->
         <!--加入对interface的依赖-->
         <dependency>
