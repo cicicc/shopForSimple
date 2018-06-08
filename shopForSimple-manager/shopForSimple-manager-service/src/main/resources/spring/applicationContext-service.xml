@@ -22,10 +22,11 @@ http://www.springframework.org/schema/util/spring-util-4.2.xsd">
     <!--使用dubbo发布服务-->
     <!--提供方应用信息 用于计算依赖关系-->
     <dubbo:application name="shopForSimple-manager"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.37.129:2181" />
+    <dubbo:registry protocol="zookeeper" address="119.23.237.182:2181" />
     <!--使用dubbo协议在20880端口暴露服务-->
     <dubbo:protocol name="dubbo" port="20880"/>
     <!--声明需要暴露的服务接口-->
-    <dubbo:service interface="cn.indispensable.shopForSimple.service.ItemService" ref="itemServiceImpl"/>
+    <dubbo:service interface="cn.indispensable.shopForSimple.service.ItemService" ref="itemServiceImpl" timeout="30000"/>
+    <dubbo:service interface="cn.indispensable.shopForSimple.service.ItemCatService" ref="itemCatServiceImpl" timeout="30000"/>
 
 </beans>

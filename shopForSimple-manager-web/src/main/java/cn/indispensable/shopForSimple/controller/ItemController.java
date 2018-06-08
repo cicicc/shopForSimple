@@ -1,5 +1,6 @@
 package cn.indispensable.shopForSimple.controller;
 
+import cn.indispensable.shopForSimple.common.pojo.EasyUIDataGridResult;
 import cn.indispensable.shopForSimple.pojo.TbItem;
 import cn.indispensable.shopForSimple.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,10 @@ public class ItemController {
         return itemService.selectItemById(itemId);
     }
 
+    @RequestMapping("/item/list")
+    @ResponseBody
+    public EasyUIDataGridResult getItemList(Integer page, Integer rows){
+        return itemService.getItemList(page, rows);
+    }
 
 }
