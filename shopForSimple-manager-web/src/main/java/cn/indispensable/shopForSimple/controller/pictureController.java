@@ -13,9 +13,12 @@ import java.util.Map;
 
 @Controller
 public class pictureController {
+
     //获取配置文件中的图片服务器的地址
     @Value("${IMAGE_SERVER_URL}")
     private String IMAGE_SERVER_URL;
+
+
     /**
      * 图片上传功能实现 对图片进行相应处理 并返回对应的信息
      * @param uploadFile 上传的文件文件名

@@ -6,9 +6,13 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * 对于查询的结果进行对应的封装 并提供一些静态方法 对结果进行转换为json的操作
+ */
 public class E3Result implements Serializable{
 
     // 定义jackson对象
+    // Jackson可以轻松的将Java对象转换成json对象和xml文档,同样也可以将json、xml转换成Java对象。
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     // 响应业务状态
@@ -20,6 +24,13 @@ public class E3Result implements Serializable{
     // 响应中的数据
     private Object data;
 
+    /**
+     * 创建一个E3Result对象
+     * @param status 响应业务状态
+     * @param msg 信息
+     * @param data 数据
+     * @return E3Result对象
+     */
     public static E3Result build(Integer status, String msg, Object data) {
         return new E3Result(status, msg, data);
     }
@@ -111,8 +122,8 @@ public class E3Result implements Serializable{
     /**
      * 没有object对象的转化
      * 
-     * @param json
-     * @return
+     * @param json json数据
+     * @return E3Result对象
      */
     public static E3Result format(String json) {
         try {
@@ -128,7 +139,7 @@ public class E3Result implements Serializable{
      * 
      * @param jsonData json数据
      * @param clazz 集合中的类型
-     * @return
+     * @return E3Result对象 存放着转换后的list数据
      */
     public static E3Result formatToList(String jsonData, Class<?> clazz) {
         try {

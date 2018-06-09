@@ -1,19 +1,21 @@
 package cn.indispensable.shopForSimple.controller;
 
 import cn.indispensable.shopForSimple.common.pojo.EasyUIDataGridResult;
+import cn.indispensable.shopForSimple.common.utils.E3Result;
 import cn.indispensable.shopForSimple.pojo.TbItem;
 import cn.indispensable.shopForSimple.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+
 @Controller
 public class ItemController {
 
     //注入ItemService
-    @Autowired
+    @Resource
     private ItemService itemService;
 
     /**
@@ -32,17 +34,35 @@ public class ItemController {
      * @param itemId 查询的商品id
      * @return 查询到的商品 并放入response域中 以json格式进行返回
      */
-
     @RequestMapping("/item/{itemId}")
     @ResponseBody
     public TbItem selectItemById(@PathVariable Long itemId) {
         return itemService.selectItemById(itemId);
     }
 
+
+    /**
+     * 调用service层获取指定页码数指定条数的数据
+     * @param page 页码数
+     * @param rows 每页显示的数据数目
+     * @return 查询得到结果的json格式
+     */
     @RequestMapping("/item/list")
     @ResponseBody
     public EasyUIDataGridResult getItemList(Integer page, Integer rows){
         return itemService.getItemList(page, rows);
     }
 
+    /**
+     * 保存商品信息
+     * @param item 商品的部分信息
+     * @param desc 商品描述
+     * @return json格式返回的E3Result对象
+     */
+    @RequestMapping("/item/save")
+    @ResponseBody
+    public E3Result saveItem(TbItem item, String desc){
+
+        return itemService.saveItem(item, desc);
+    }
 }

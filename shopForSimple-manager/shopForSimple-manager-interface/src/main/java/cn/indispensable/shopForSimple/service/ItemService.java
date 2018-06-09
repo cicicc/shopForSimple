@@ -1,6 +1,7 @@
 package cn.indispensable.shopForSimple.service;
 
 import cn.indispensable.shopForSimple.common.pojo.EasyUIDataGridResult;
+import cn.indispensable.shopForSimple.common.utils.E3Result;
 import cn.indispensable.shopForSimple.pojo.TbItem;
 
 public interface ItemService {
@@ -18,4 +19,10 @@ public interface ItemService {
      * @return 查询结果封装的pojo类对象
      */
     EasyUIDataGridResult getItemList(int page, int rows);
+
+    /**
+     * 保存商品信息
+     * @return  封装了商品信息的E3Result对象
+     */
+    E3Result saveItem(TbItem item, String desc);
 }

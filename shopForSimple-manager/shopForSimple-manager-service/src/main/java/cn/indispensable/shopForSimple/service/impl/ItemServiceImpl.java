@@ -1,8 +1,12 @@
 package cn.indispensable.shopForSimple.service.impl;
 
 import cn.indispensable.shopForSimple.common.pojo.EasyUIDataGridResult;
+import cn.indispensable.shopForSimple.common.utils.E3Result;
+import cn.indispensable.shopForSimple.common.utils.IDUtils;
+import cn.indispensable.shopForSimple.dao.TbItemDescMapper;
 import cn.indispensable.shopForSimple.dao.TbItemMapper;
 import cn.indispensable.shopForSimple.pojo.TbItem;
+import cn.indispensable.shopForSimple.pojo.TbItemDesc;
 import cn.indispensable.shopForSimple.pojo.TbItemExample;
 import cn.indispensable.shopForSimple.service.ItemService;
 import com.github.pagehelper.PageHelper;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,7 +25,9 @@ public class ItemServiceImpl implements ItemService {
     //注入TBItemMapper对象
     @Resource
     private TbItemMapper itemMapper;
-
+    //注入TbItemDescMapper对象
+    @Resource
+    private TbItemDescMapper itemDescMapper;
 
     /**
      * 调用dao层根据商品id查询Tb_Item表
@@ -55,5 +62,32 @@ public class ItemServiceImpl implements ItemService {
         result.setTotal(pageInfo.getTotal());
         result.setRows(itemList);
         return result;
+    }
+
+    /**
+     * 保存商品的service层部分
+     * @param item 商品的部分信息
+     * @param desc 商品描述
+     * @return json格式返回的E3Result对象
+     */
+    @Override
+    public E3Result saveItem(TbItem item, String desc) {
+        //1、生成商品 id
+        long itemId = IDUtils.genItemId();
+        //2、补全 TbItem 对象的属性 id
+        item.setId(itemId);
+        //3、向商品表插入数据
+        this.itemMapper.insert(item);
+        //4、创建一个 TbItemDesc 对象
+        TbItemDesc itemDesc = new TbItemDesc();
+        //5、补全 TbItemDesc 的属性
+        itemDesc.setItemDesc(desc);
+        itemDesc.setItemId(itemId);
+        itemDesc.setCreated(new Date());
+        itemDesc.setUpdated(new Date());
+        //6、向商品描述表插入数据
+        itemDescMapper.insert(itemDesc);
+        //7、调用E3Result.ok() 返回一个空参E3Result对象 表示插入成功
+        return E3Result.ok();
     }
 }
