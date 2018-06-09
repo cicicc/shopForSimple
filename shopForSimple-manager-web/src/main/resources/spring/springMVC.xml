@@ -17,11 +17,20 @@ http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <context:component-scan base-package="cn.indispensable.shopForSimple.controller"/>
     <!--设置注解驱动-->
     <mvc:annotation-driven />
+    <!--加载配置文件-->
+    <context:property-placeholder location="classpath:conf/resource.properties"/>
     <!--设置访问路径的前后缀-->
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="suffix" value="/WEB-INF/jsp/"/>
         <property name="prefix" value=".jsp"/>
     </bean>-->
+    <!--配置图片上传的参数-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+        <!--设定默认的编码集-->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!--上传图片的最大尺寸 五兆 这里应该指的是每次上传最大五兆-->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
     <!-- 配置资源映射 -->
     <mvc:resources location="/css/" mapping="/css/**"/>
     <mvc:resources location="/js/" mapping="/js/**"/>
