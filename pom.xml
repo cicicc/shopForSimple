@@ -11,6 +11,8 @@
         <module>shopForSimple-common</module>
         <module>shopForSimple-manager</module>
         <module>shopForSimple-manager-web</module>
+        <module>shopForSimple-content</module>
+        <module>shopForSimple-portal-web</module>
     </modules>
     <packaging>pom</packaging>
     <!-- 集中定义依赖版本号 -->

@@ -129,7 +129,7 @@ public class ItemServiceImpl implements ItemService {
 
 
     /**
-     * 抽取去逻辑删除 上架商品 下架商品中的共同代码 并提取出不同量作为变量传递进本函数
+     * 抽取出逻辑删除 上架商品 下架商品中的共同代码 并提取出不同量作为变量传递进本函数
      * @param ids 要进行操作的id 以 , 割开
      * @param status 状态码更改为此参数
      * @return 保存操作成功与否的信息的E3Result对象
