@@ -13,7 +13,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
@@ -76,6 +75,10 @@ public class ItemServiceImpl implements ItemService {
         long itemId = IDUtils.genItemId();
         //2、补全 TbItem 对象的属性 id
         item.setId(itemId);
+        //1-正常，2-下架，3-删除
+        item.setStatus((byte) 1);
+        item.setCreated(new Date());
+        item.setUpdated(new Date());
         //3、向商品表插入数据
         this.itemMapper.insert(item);
         //4、创建一个 TbItemDesc 对象
@@ -90,4 +93,64 @@ public class ItemServiceImpl implements ItemService {
         //7、调用E3Result.ok() 返回一个空参E3Result对象 表示插入成功
         return E3Result.ok();
     }
+
+    /**
+     * s删除商品的service层具体实现
+     * 逻辑删除商品信息 将商品的状态改为3(删除)
+     * @param ids 要删除的商品id
+     */
+    @Override
+    public E3Result deleteItem(String ids) {
+
+        return updateStatus(ids, (byte)3);
+    }
+
+    /**
+     * 下架商品
+     * status 1-正常，2-下架，3-删除
+     * @param ids 要下架的商品们的Id
+     * @return 保存下架成功与否的信息的E3Result对象
+     */
+    @Override
+    public E3Result undercarriageItem(String ids) {
+
+        return updateStatus(ids, (byte)2);
+    }
+    /**
+     * 上架商品
+     * status 1-正常，2-下架，3-删除
+     * @param ids 要上架的商品们的Id
+     * @return 保存上架成功与否的信息的E3Result对象
+     */
+    @Override
+    public E3Result putAwayItem(String ids) {
+        return updateStatus(ids, (byte)1);
+    }
+
+
+    /**
+     * 抽取去逻辑删除 上架商品 下架商品中的共同代码 并提取出不同量作为变量传递进本函数
+     * @param ids 要进行操作的id 以 , 割开
+     * @param status 状态码更改为此参数
+     * @return 保存操作成功与否的信息的E3Result对象
+     */
+    private E3Result updateStatus(String ids, Byte status) {
+        //根据,拆分传递过来的id
+        String[] itemIds = ids.split(",");
+        try {
+            for (String id : itemIds) {
+                //根据id删除数据
+                Long itemId = Long.parseLong(id);
+                TbItem tbItem = itemMapper.selectByPrimaryKey(itemId);
+                tbItem.setStatus(status);
+                tbItem.setUpdated(new Date());
+                itemMapper.updateByPrimaryKey(tbItem);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return E3Result.build(500, "下架失败");
+        }
+        return E3Result.ok();
+    }
+
 }

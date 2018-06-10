@@ -56,6 +56,7 @@
         		onLoad :function(){
         			//回显数据
         			var data = $("#itemList").datagrid("getSelections")[0];
+                    alert(data);
         			data.priceView = E3.formatPrice(data.price);
         			$("#itemeEditForm").form("load",data);
         			

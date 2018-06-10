@@ -52,7 +52,7 @@ var E3 = {
         } else if(val == 2){
         	return '<span style="color:red;">下架</span>';
         } else {
-        	return '未知';
+        	return '已删除';
         }
     },
     

@@ -25,4 +25,26 @@ public interface ItemService {
      * @return  封装了商品信息的E3Result对象
      */
     E3Result saveItem(TbItem item, String desc);
+
+    /**
+     * 删除商品
+     * @param ids 要删除的商品id
+     * @return 保存了是否删除成功的e3Result对象
+     */
+    E3Result deleteItem(String ids);
+
+    /**
+     * 下架商品
+     * @param ids 要下架的商品们的Id
+     * @return 保存了是否下架成功的信息的e3Result对象
+     */
+    E3Result undercarriageItem(String ids);
+
+    /**
+     * 上架商品
+     * @param ids 要上架的商品们的Id
+     * @return 保存了是否上架成功的信息的e3Result对象
+     */
+    E3Result putAwayItem(String ids);
+
 }

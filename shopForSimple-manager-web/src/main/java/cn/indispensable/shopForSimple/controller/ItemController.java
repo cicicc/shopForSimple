@@ -34,7 +34,7 @@ public class ItemController {
      * @param itemId 查询的商品id
      * @return 查询到的商品 并放入response域中 以json格式进行返回
      */
-    @RequestMapping("/item/{itemId}")
+    @RequestMapping("/item/{itemId}, /item/edit")
     @ResponseBody
     public TbItem selectItemById(@PathVariable Long itemId) {
         return itemService.selectItemById(itemId);
@@ -64,5 +64,38 @@ public class ItemController {
     public E3Result saveItem(TbItem item, String desc){
 
         return itemService.saveItem(item, desc);
+    }
+
+    /**
+     * 逻辑删除商品信息
+     * @param ids  页面传递过来要进行删除的商品的ids 以逗号割开id
+     * @return 封装了是否删除成功的信息的E3Result对象
+     */
+    @RequestMapping("/rest/item/delete")
+    @ResponseBody
+    public E3Result deleteItem(String ids) {
+        return itemService.deleteItem(ids);
+    }
+
+    /**
+     * 下架商品
+     * @param ids  页面传递过来要进行下架商品的ids 以逗号割开id
+     * @return 封装了是否下架成功的信息的E3Result对象
+     */
+    @RequestMapping("/rest/item/instock")
+    @ResponseBody
+    public E3Result undercarriageItem(String ids) {
+        return itemService.undercarriageItem(ids);
+    }
+
+    /**
+     * 上架商品
+     * @param ids  页面传递过来要进行上架商品的ids 以逗号割开id
+     * @return 封装了是否上架成功的信息的E3Result对象
+     */
+    @RequestMapping("/rest/item/reshelf")
+    @ResponseBody
+    public E3Result putAwayItem(String ids) {
+        return itemService.putAwayItem(ids);
     }
 }
