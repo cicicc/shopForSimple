@@ -25,5 +25,5 @@ http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     </bean>
     <!--引用dubbo的服务-->
     <dubbo:application name="shopForSimple-portal-web"/>
-    <dubbo:registry protocol="zookeeper" address="119.23.237.182:2181"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.25.128:2181"/>
 </beans>
