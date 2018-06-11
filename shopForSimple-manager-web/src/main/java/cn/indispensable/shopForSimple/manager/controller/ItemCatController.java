@@ -1,4 +1,4 @@
-package cn.indispensable.shopForSimple.controller;
+package cn.indispensable.shopForSimple.manager.controller;
 
 import cn.indispensable.shopForSimple.common.pojo.EasyUITreeNode;
 import cn.indispensable.shopForSimple.service.ItemCatService;

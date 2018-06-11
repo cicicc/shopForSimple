@@ -1,4 +1,4 @@
-package cn.indispensable.shopForSimple.controller;
+package cn.indispensable.shopForSimple.manager.controller;
 
 import cn.indispensable.shopForSimple.common.pojo.EasyUIDataGridResult;
 import cn.indispensable.shopForSimple.common.utils.E3Result;

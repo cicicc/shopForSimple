@@ -1,4 +1,4 @@
-package cn.indispensable.shopForSimple.controller;
+package cn.indispensable.shopForSimple.manager.controller;
 
 import cn.indispensable.shopForSimple.common.utils.FastDFSClient;
 import cn.indispensable.shopForSimple.common.utils.JsonUtils;

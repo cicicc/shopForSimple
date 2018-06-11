@@ -1,4 +1,4 @@
-package cn.indispensable.shopForSimple.controller;
+package cn.indispensable.shopForSimple.manager.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
