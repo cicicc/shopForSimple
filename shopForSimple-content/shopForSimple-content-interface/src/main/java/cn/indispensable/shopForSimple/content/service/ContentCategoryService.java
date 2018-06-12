@@ -1,4 +1,4 @@
-package cn.indispensable.shopForSimple.service;
+package cn.indispensable.shopForSimple.content.service;
 
 import cn.indispensable.shopForSimple.common.pojo.EasyUITreeNode;
 

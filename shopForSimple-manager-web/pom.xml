@@ -31,6 +31,11 @@
             <artifactId>shopForSimple-manager-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>cn.indispensable.shopForSimple</groupId>
+            <artifactId>shopForSimple-content-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

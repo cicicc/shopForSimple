@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.indispensable.shopForSimple.service.impl;
+package cn.indispensable.shopForSimple.content.service.impl;
 
 import cn.indispensable.shopForSimple.common.pojo.EasyUITreeNode;
 import cn.indispensable.shopForSimple.dao.TbContentCategoryMapper;
 import cn.indispensable.shopForSimple.pojo.TbContentCategory;
 import cn.indispensable.shopForSimple.pojo.TbContentCategoryExample;
-import cn.indispensable.shopForSimple.service.ContentCategoryService;
+import cn.indispensable.shopForSimple.content.service.ContentCategoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
