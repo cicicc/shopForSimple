@@ -22,9 +22,9 @@ http://www.springframework.org/schema/util/spring-util-4.2.xsd">
     <!--使用dubbo发布服务-->
     <!--提供方应用信息 用于计算依赖关系-->
     <dubbo:application name="shopForSimple-content"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.25.128:2181" />
+    <dubbo:registry protocol="zookeeper" address="192.168.25.129:2181" />
     <!--使用dubbo协议在20880端口暴露服务-->
-    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="dubbo" port="20881"/>
     <!--声明需要暴露的服务接口-->
     <dubbo:service interface="cn.indispensable.shopForSimple.content.service.ContentCategoryService" ref="contentCategoryServiceImpl" timeout="30000"/>
 </beans>

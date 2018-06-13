@@ -103,6 +103,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.indispensable.shopForSimple.pojo.TbContentCategory" >
+    <selectKey resultType="Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID();
+    </selectKey>
     insert into tb_content_category (id, parent_id, name, 
       status, sort_order, is_parent, 
       created, updated)
