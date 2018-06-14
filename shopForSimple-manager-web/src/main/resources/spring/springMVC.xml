@@ -20,10 +20,10 @@ http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <!--加载配置文件-->
     <context:property-placeholder location="classpath:conf/resource.properties"/>
     <!--设置访问路径的前后缀-->
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="suffix" value="/WEB-INF/jsp/"/>
         <property name="prefix" value=".jsp"/>
-    </bean>-->
+    </bean>
     <!--配置图片上传的参数-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
         <!--设定默认的编码集-->
@@ -40,4 +40,5 @@ http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <dubbo:reference interface="cn.indispensable.shopForSimple.service.ItemService" id="itemService" timeout="30000"/>
     <dubbo:reference interface="cn.indispensable.shopForSimple.service.ItemCatService" id="itemCatService" timeout="30000"/>
     <dubbo:reference interface="cn.indispensable.shopForSimple.content.service.ContentCategoryService" id="contentCategoryService" timeout="30000"/>
+    <dubbo:reference interface="cn.indispensable.shopForSimple.content.service.ContentService" id="contentService" timeout="30000"/>
 </beans>

@@ -22,6 +22,7 @@ import cn.indispensable.shopForSimple.pojo.TbContentCategory;
 import cn.indispensable.shopForSimple.pojo.TbContentCategoryExample;
 import cn.indispensable.shopForSimple.content.service.ContentCategoryService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @Service
+@Transactional
 public class ContentCategoryServiceImpl implements ContentCategoryService {
 
 
