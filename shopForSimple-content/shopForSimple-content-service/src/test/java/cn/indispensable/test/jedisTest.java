@@ -31,6 +31,9 @@ public class jedisTest {
         Jedis jedis = new Jedis("192.168.25.129", 6379);
         //第二步：使用 Jedis 对象操作数据库，每个 redis 命令对应一个方法。
         jedis.set("name", "hello");
+        jedis.hset("name", "test1", "laochen");
+        String hname = jedis.hget("name", "test1");
+        System.out.println("jname=" + hname);
         String name = jedis.get("name");
         //第三步：打印结果。
         System.out.println(name);
