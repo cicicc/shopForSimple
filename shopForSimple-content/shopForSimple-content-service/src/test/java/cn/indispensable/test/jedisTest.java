@@ -49,7 +49,7 @@ public class jedisTest {
     public void testJedisconfig(){
         //获取配置文件的上下文对象
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/applicationContext-redis.xml");
-        IjedisClient ijedisClient = context.getBean(IjedisClient.class);
+        IjedisClient ijedisClient = context.getBean(JedisClientPool.class);
         ijedisClient.set("name", "laochen");
         String name = ijedisClient.get("name");
         System.out.println(name);

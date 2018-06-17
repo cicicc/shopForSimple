@@ -23,6 +23,6 @@ http://www.springframework.org/schema/util/spring-util-4.2.xsd">
         <constructor-arg name="port" value="6379"></constructor-arg>
     </bean>
     <bean id="jedisClientPool" class="cn.indispensable.shopForSimple.common.jedis.JedisClientPool">
-        <property name="jedisPool" ref="jedisPool"></property>
+        <!--<property name="jedisPool" ref="jedisPool"></property>-->
     </bean>
 </beans>
