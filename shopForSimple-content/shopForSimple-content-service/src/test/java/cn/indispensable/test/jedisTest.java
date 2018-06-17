@@ -15,7 +15,10 @@
  */
 package cn.indispensable.test;
 
+import cn.indispensable.shopForSimple.common.jedis.IjedisClient;
+import cn.indispensable.shopForSimple.common.jedis.JedisClientPool;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import redis.clients.jedis.Jedis;
 
 /**
@@ -41,5 +44,14 @@ public class jedisTest {
         System.out.println(name);
         //第四步：关闭 Jedis
         jedis.close();
+    }
+    @Test
+    public void testJedisconfig(){
+        //获取配置文件的上下文对象
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/applicationContext-redis.xml");
+        IjedisClient ijedisClient = context.getBean(IjedisClient.class);
+        ijedisClient.set("name", "laochen");
+        String name = ijedisClient.get("name");
+        System.out.println(name);
     }
 }
