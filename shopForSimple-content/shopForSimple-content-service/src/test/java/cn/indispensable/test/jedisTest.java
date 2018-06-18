@@ -33,12 +33,9 @@ public class jedisTest {
     @Test
     public void testJedisSingle(){
         //第一步：创建一个 Jedis 对象。需要指定服务端的 ip 及端口。
-        Jedis jedis = new Jedis("192.168.25.129", 6379);
+        Jedis jedis = new Jedis("192.168.25.132", 6379);
         //第二步：使用 Jedis 对象操作数据库，每个 redis 命令对应一个方法。
-        jedis.set("name", "hello");
-        jedis.hset("name", "test1", "laochen");
-        String hname = jedis.hget("name", "test1");
-        System.out.println("jname=" + hname);
+        jedis.set("name", "hello1");
         String name = jedis.get("name");
         //第三步：打印结果。
         System.out.println(name);
@@ -50,8 +47,8 @@ public class jedisTest {
         //获取配置文件的上下文对象
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/applicationContext-redis.xml");
         IjedisClient ijedisClient = context.getBean(JedisClientPool.class);
-        ijedisClient.set("name", "laochen");
-        String name = ijedisClient.get("name");
+        ijedisClient.set("name1", "pangchun");
+        String name = ijedisClient.get("name1");
         System.out.println(name);
     }
 }

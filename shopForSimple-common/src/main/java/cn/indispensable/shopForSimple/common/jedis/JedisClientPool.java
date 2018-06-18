@@ -26,8 +26,15 @@ import java.util.List;
  * @since jedis工具类
  */
 public class JedisClientPool implements IjedisClient{
-    @Resource
     private JedisPool jedisPool;
+
+    public JedisPool getJedisPool() {
+        return jedisPool;
+    }
+
+    public void setJedisPool(JedisPool jedisPool) {
+        this.jedisPool = jedisPool;
+    }
 
     @Override
     public String set(String key, String value) {
