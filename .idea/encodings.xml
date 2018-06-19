@@ -13,5 +13,9 @@
     <file url="file://$PROJECT_DIR$/shopForSimple-manager/shopForSimple-manager-pojo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/shopForSimple-manager/shopForSimple-manager-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/shopForSimple-portal-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopForSimple-search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopForSimple-search-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopForSimple-search/shopForSimple-search-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopForSimple-search/shopForSimple-search-service" charset="UTF-8" />
   </component>
 </project>

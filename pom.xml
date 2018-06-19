@@ -13,6 +13,8 @@
         <module>shopForSimple-manager-web</module>
         <module>shopForSimple-content</module>
         <module>shopForSimple-portal-web</module>
+        <module>shopForSimple-search</module>
+        <module>shopForSimple-search-web</module>
     </modules>
     <packaging>pom</packaging>
     <!-- 集中定义依赖版本号 -->

@@ -11,6 +11,8 @@
     <file type="web" url="file://$PROJECT_DIR$/shopForSimple-manager-web" />
     <file type="web" url="file://$PROJECT_DIR$/shopForSimple-manager/shopForSimple-manager-service" />
     <file type="web" url="file://$PROJECT_DIR$/shopForSimple-portal-web" />
+    <file type="web" url="file://$PROJECT_DIR$/shopForSimple-search-web" />
+    <file type="web" url="file://$PROJECT_DIR$/shopForSimple-search/shopForSimple-search-service" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

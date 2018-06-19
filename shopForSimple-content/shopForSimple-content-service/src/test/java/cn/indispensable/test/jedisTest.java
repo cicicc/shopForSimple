@@ -30,7 +30,7 @@ public class jedisTest {
     /**
      * 第一个简单测试程序
      */
-    @Test
+/*    @Test
     public void testJedisSingle(){
         //第一步：创建一个 Jedis 对象。需要指定服务端的 ip 及端口。
         Jedis jedis = new Jedis("192.168.25.132", 6379);
@@ -50,5 +50,5 @@ public class jedisTest {
         //ijedisClient.set("name1", "pangchun");
         String name = ijedisClient.get("name1");
         System.out.println(name);
-    }
+    }*/
 }

@@ -15,6 +15,9 @@
         <module name="shopForSimple-manager-service" />
         <module name="shopForSimple-manager-web" />
         <module name="shopForSimple-portal-web" />
+        <module name="shopForSimple-search-interface" />
+        <module name="shopForSimple-search-service" />
+        <module name="shopForSimple-search-web" />
       </profile>
     </annotationProcessing>
   </component>
