@@ -26,7 +26,7 @@ import java.util.List;
 public class SearchResult implements Serializable {
     //1）商品列表 List<SearchItem>
     private List<SearchItem> itemList;
-    //2）总页数。Int totalPages。总记录数/每页显示的记录数向上取整。把每页显示的记录是配置到属性文件中。
+    //2）总页数Int totalPages 总记录数/每页显示的记录数向上取整
     private int totalPages;
     //3）总记录数。Int recordCount
     private int recordCount;
@@ -48,11 +48,11 @@ public class SearchResult implements Serializable {
         this.totalPages = totalPages;
     }
 
-    public int getRecourdCount() {
+    public int getRecordCount() {
         return recordCount;
     }
 
-    public void setRecourdCount(int recordCount) {
+    public void setRecordCount(int recordCount) {
         this.recordCount = recordCount;
     }
 }

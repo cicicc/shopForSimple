@@ -10,6 +10,8 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
+	<!--加载配置文件-->
+	<context:property-placeholder location="classpath:conf/resource.properties"/>
 	<!-- 配置包扫描器 -->
 	<context:component-scan base-package="cn.indispensable.shopForSimple.search.service"/>
 	<!-- 使用dubbo发布服务 -->
@@ -20,5 +22,7 @@
 	<dubbo:protocol name="dubbo" port="20882" />
 	<!-- 声明需要暴露的服务接口 -->
 	<dubbo:service interface="cn.indispensable.shopForSimple.search.service.SearchItemService"
-				   ref="searchItemServiceImpl"/>
+				   ref="searchItemServiceImpl" timeout="30000"/>
+	<dubbo:service interface="cn.indispensable.shopForSimple.search.service.SearchService"
+				   ref="searchServiceImpl" timeout="30000"/>
 </beans>
