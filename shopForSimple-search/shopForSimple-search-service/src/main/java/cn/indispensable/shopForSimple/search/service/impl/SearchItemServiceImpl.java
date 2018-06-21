@@ -20,11 +20,13 @@ import cn.indispensable.shopForSimple.common.utils.E3Result;
 import cn.indispensable.shopForSimple.search.mapper.SearchItemMapper;
 import cn.indispensable.shopForSimple.search.service.SearchItemService;
 import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -38,7 +40,7 @@ public class SearchItemServiceImpl  implements SearchItemService {
     @Autowired
     private SearchItemMapper searchItemMapper;
     @Autowired
-    private SolrServer searchItemMappersolrServer;
+    private SolrServer solrServer;
 
     /**
      * 添加商品到索引库中去
@@ -46,26 +48,32 @@ public class SearchItemServiceImpl  implements SearchItemService {
      */
     @Override
     public E3Result importItems() {
-        ////查询商品列表
+        //查询商品列表
         List<SearchItem> itemList = searchItemMapper.getItemList();
-        //导入索引库
-        for (SearchItem searchItem : itemList) {
-            //创建文档对象
-            SolrInputDocument inputDocument = new SolrInputDocument();
-            //向文档中添加域
-            inputDocument.addField("id", searchItem.getId());
-            inputDocument.addField("item_title", searchItem.getTitle());
-            inputDocument.addField("item_sell_point", searchItem.getSell_point());
-            inputDocument.addField("item_price", searchItem.getPrice());
-            inputDocument.addField("item_image", searchItem.getImage());
-            inputDocument.addField("item_category_name", searchItem.getCategory_name());
+        try {
+         //导入索引库
+            for (SearchItem searchItem : itemList) {
+                //创建文档对象
+                SolrInputDocument inputDocument = new SolrInputDocument();
+                //向文档中添加域
+                inputDocument.addField("id", searchItem.getId());
+                inputDocument.addField("item_title", searchItem.getTitle());
+                inputDocument.addField("item_sell_point", searchItem.getSell_point());
+                inputDocument.addField("item_price", searchItem.getPrice());
+                inputDocument.addField("item_image", searchItem.getImage());
+                inputDocument.addField("item_category_name", searchItem.getCategory_name());
+                //写入索引库
+                solrServer.add(inputDocument);
+            }
+            //提交
+            solrServer.commit();
+            //返回成功
+            return E3Result.ok();
+        } catch (SolrServerException | IOException e) {
+            e.printStackTrace();
+            return E3Result.build(500, "添加索引出错");
         }
-        //写入索引库
-        //solrServer.add(document);
-        //}
-        //提交
-        //solrServer.commit();
-        //返回成功
-        return null;
+
+
     }
 }

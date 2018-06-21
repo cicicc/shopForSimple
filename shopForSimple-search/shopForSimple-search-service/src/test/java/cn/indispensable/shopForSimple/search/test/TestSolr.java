@@ -150,4 +150,50 @@ public class TestSolr {
             System.out.println("高亮之后所得数据" + itemSellPoint);
         }
     }
+   /**
+    * 使用 solrJ 实现查询
+    */
+    @Test
+    public void queryDocument() throws SolrServerException {
+        //创建一个查询对象，可以参考 solr 的后台的查询功能设置条件
+        SolrQuery solrQuery = new SolrQuery();
+        //设置查询条件
+        solrQuery.set("q", "三星");
+        //设置分页条件
+        solrQuery.setStart(0);
+        solrQuery.setRows(30);
+        //开启高亮
+        solrQuery.setHighlight(true);
+        solrQuery.addHighlightField("item_title");
+        solrQuery.setHighlightSimplePre("<em>");
+        solrQuery.setHighlightSimplePost("</em>");
+        //设置默认搜索域
+        solrQuery.set("df", "item_title");
+        //执行查询，得到一个 QueryResponse 对象。
+        QueryResponse response = solrServer.query(solrQuery);
+        //取查询结果总记录数
+        SolrDocumentList results = response.getResults();
+        long resultsNumFound = results.getNumFound();
+        System.out.println("查询所得的结果总数为+=="+resultsNumFound);
+        //取查询结果
+        //item_title" type="text_ik" indexed="true" stored="true"/>
+        for (SolrDocument itemDocument : results) {
+            System.out.println("======================");
+            System.out.println("此索引的id为   "+itemDocument.get("id"));
+            Map<String, Map<String, List<String>>> responseHighlighting = response.getHighlighting();
+            List<String> list = responseHighlighting.get(itemDocument.get("id")).get("item_title");
+            String itemTitle = "";
+            if (list!=null && list.size() > 0) {
+                itemTitle = list.get(0);
+            }else {
+                itemTitle = (String) itemDocument.get("item_title");
+            }
+            System.out.println(itemTitle);
+            System.out.println(itemDocument.get("item_sell_point"));
+            System.out.println(itemDocument.get("item_price"));
+            System.out.println(itemDocument.get("item_image"));
+            System.out.println(itemDocument.get("item_category_name"));
+        }
+
+        }
 }
