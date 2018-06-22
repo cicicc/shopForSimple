@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 /**
+ * 查询的service层
  * @author cicicc
  * @since 1.0.0
  */
