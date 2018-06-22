@@ -61,7 +61,7 @@ public class SearchServiceImpl implements SearchService {
         solrQuery.setHighlightSimplePost("</em>");
         //执行查询并将结果返回
         SearchResult searchResult = searchDao.searchByCondition(solrQuery);
-        //计算总的页码数
+        //计算总页码数
         int recordCount = searchResult.getRecordCount();
         int pages = recordCount / rows;
         if (recordCount % rows > 0){
