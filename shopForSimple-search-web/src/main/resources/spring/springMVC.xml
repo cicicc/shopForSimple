@@ -19,6 +19,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<!-- 全局异常处理器 -->
+	<bean class="cn.indispensable.shopForSimple.search.exception.GlobalExceptionResolver"/>
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="e3-search-web"/>
 	<dubbo:registry protocol="zookeeper" address="192.168.25.132:2181"/>
