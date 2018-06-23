@@ -78,10 +78,11 @@ public class TestActiveMQ {
         //第六步：使用 Session 对象创建一个 Consumer 对象。
         MessageConsumer consumer = session.createConsumer(queue);
         //第七步：接收消息。
-        Message message = consumer.receive();
+//        Message message = consumer.receive();
         //第八步：打印消息。
+
         System.out.println("==========================================");
-        System.out.println(message);
+//        System.out.println(message);
         System.out.println("==========================================");
         //第九步：关闭资源
         consumer.close();
