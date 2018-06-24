@@ -17,9 +17,12 @@ package cn.indispensable.shopForSimple.manager.test;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQTextMessage;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.jms.*;
+import java.io.IOException;
 
 /**
  * 练习消息总线ActiveMQ的使用
@@ -31,21 +34,31 @@ import javax.jms.*;
  */
 public class TestActiveMQ {
 
+
+    private Session session;
+    private Connection connection;
+    @Before
+    public void init() throws JMSException {
+        //第一步：创建一个 ConnectionFactory 对象。
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.25.134:61616");
+        //第二步：从 ConnectionFactory 对象中获得一个 Connection 对象。
+        connection = connectionFactory.createConnection();
+        //第三步：开启连接。调用 Connection 对象的 start 方法。
+        connection.start();
+        //第四步：使用 Connection 对象创建一个 Session 对象。
+        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+    }
+    @After
+    public void closeSource() throws JMSException {
+        session.close();
+        connection.close();
+    }
+
     /**
      * 练习使用关于消息队列的生产者代码书写
      */
     @Test
     public void testProducer() throws JMSException {
-        //第一步：创建 ConnectionFactory 对象，需要指定服务端 ip 及端口号。
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory( "tcp://192.168.25.132:61616");
-        //第二步：使用 ConnectionFactory 对象创建一个 Connection 对象。
-        Connection connection = connectionFactory.createConnection();
-        //第三步：开启连接，调用 Connection 对象的 start 方法。
-        connection.start();
-        //第四步：使用 Connection 对象创建一个 Session 对象。
-        //第一个参数：是否开启事务。true：开启事务，第二个参数忽略。
-        //第二个参数：当第一个参数为 false 时，才有意义。消息的应答模式。1、自动应答 2、手动应答。一般是自动应答。
-        Session session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
         //第五步：使用 Session 对象创建一个 Destination 对象（topic、queue），此处创建一个 Queue 对象。 参数：队列的名称
         Queue queue = session.createQueue("MQQueue");
         //第六步：使用 Session 对象创建一个 Producer 对象。
@@ -57,36 +70,97 @@ public class TestActiveMQ {
         producer.send(message);
         //第九步：关闭资源。
         producer.close();
-        session.close();
-        connection.close();
         System.out.println("All Right");
     }
-
+    /**
+     * 练习使用关于消息队列的消费者代码书写
+     */
     @Test
-    public void testConsumer() throws JMSException {
+    public void testConsumer() throws JMSException, IOException {
         //消费者：接收消息。
-        //第一步：创建一个 ConnectionFactory 对象。
-        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.25.132:61616");
-        //第二步：从 ConnectionFactory 对象中获得一个 Connection 对象。
-        Connection connection = connectionFactory.createConnection();
-        //第三步：开启连接。调用 Connection 对象的 start 方法。
-        connection.start();
-        //第四步：使用 Connection 对象创建一个 Session 对象。
-        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         //第五步：使用 Session 对象创建一个 Destination 对象。和发送端保持一致 queue，并且队列的名称一致。
         Queue queue = session.createQueue("MQQueue");
         //第六步：使用 Session 对象创建一个 Consumer 对象。
         MessageConsumer consumer = session.createConsumer(queue);
         //第七步：接收消息。
 //        Message message = consumer.receive();
-        //第八步：打印消息。
-
-        System.out.println("==========================================");
+       /* consumer.setMessageListener(new MessageListener() {
+            @Override
+            public void onMessage(Message message) {
+                TextMessage textMessage = (TextMessage) message;
+                //接收文本内容
+                String text ;
+                try {
+                    text = textMessage.getText();
+                    //第八步：打印消息。
+                    System.out.println("==========================================");
+                    System.out.println(text);
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+            }
+        });*/
+        Message message = consumer.receive();
+        System.out.println("==============");
+        System.out.println(message);
+        //等待队列中新的消息输入
+        System.in.read();
 //        System.out.println(message);
-        System.out.println("==========================================");
         //第九步：关闭资源
         consumer.close();
-        session.close();
-        connection.close();
+    }
+    /**
+     * 练习使用关于topic的生产者代码书写
+     */
+    @Test
+    public  void testTopicProducer() throws JMSException {
+        //第五步：使用 Session 对象创建一个 Destination 对象（topic、queue），此处创建一个 Topic 对象。
+        Topic topic = session.createTopic("test_topic");
+        //第六步：使用 Session 对象创建一个 Producer 对象。
+        MessageProducer producer = session.createProducer(topic);
+        //第七步：创建一个 Message 对象，创建一个 TextMessage 对象。
+        /*TextMessage message = new ActiveMQTextMessage();
+        message.setText("汪纯是小猪");*/
+        TextMessage message = session.createTextMessage("hello activeMq,this is my topic test");
+        //第八步：使用 Producer 对象发送消息。
+        producer.send(message);
+        //第九步：关闭资源。
+        producer.close();
+        System.out.println("All Right!");
+    }
+
+
+    /**
+     * 练习使用关于topic的消费者代码书写
+     */
+    @Test
+    public void testTopicConsumer() throws JMSException, IOException {
+        //第五步：使用 Session 对象创建一个 Destination 对象。和发送端保持一致 topic，并且话题的名称一致。
+        Topic topic = session.createTopic("test_topic");
+        //第六步：使用 Session 对象创建一个 Consumer 对象。
+        MessageConsumer consumer = session.createConsumer(topic);
+        //第七步：接收消息。
+        consumer.setMessageListener(new MessageListener() {
+            @Override
+            public void onMessage(Message message) {
+                try {
+                    TextMessage textMessage = (TextMessage) message;
+                    String text ;
+                    // 取消息的内容
+                    text = textMessage.getText();
+                    // 第八步：打印消息。
+                    System.out.println("===================");
+                    System.out.println(text);
+                    System.out.println("===================");
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        System.out.println("Are you ok?");
+        //等待键盘输入
+        System.in.read();
+        //第九步：关闭资源
+        consumer.close();
     }
 }
