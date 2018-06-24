@@ -15,6 +15,8 @@ http://www.springframework.org/schema/tx
 http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 http://www.springframework.org/schema/util
 http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+    <!--加载配置文件 -->
+    <context:property-placeholder location="conf/resource.properties"/>
     <!-- 真正可以产生 Connection 的 ConnectionFactory，由对应的 JMS 服务厂商提供 -->
     <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="tcp://192.168.25.134:61616" />
@@ -24,5 +26,21 @@ http://www.springframework.org/schema/util/spring-util-4.2.xsd">
           class="org.springframework.jms.connection.SingleConnectionFactory">
         <!-- 目标 ConnectionFactory 对应真实的可以产生 JMS Connection 的 ConnectionFactory -->
         <property name="targetConnectionFactory" ref="targetConnectionFactory" />
+    </bean>
+    <!-- 配置生产者 -->
+    <!-- Spring 提供的 JMS 工具类，它可以进行消息发送、接收等 -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <!-- 这个 connectionFactory 对应的是我们定义的 Spring 提供的那个 ConnectionFactory 对象 -->
+        <property name="connectionFactory" ref="connectionFactory" />
+    </bean>
+    <!--这个是队列目的地，点对点的 -->
+    <bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg>
+            <value>spring-queue</value>
+        </constructor-arg>
+    </bean>
+    <!--这个是主题目的地，一对多的 -->
+    <bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="topic" />
     </bean>
 </beans>
