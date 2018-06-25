@@ -53,7 +53,7 @@ public class SearchDao {
         long resultsNumFound = results.getNumFound();
         //创建一个返回结果对象
         SearchResult searchResult = new SearchResult();
-        searchResult.setRecourdCount((int) resultsNumFound);
+        searchResult.setRecordCount((int) resultsNumFound);
         //创建一个商品列表对象
         ArrayList<SearchItem> itemList = new ArrayList<>();
         //取商品列表
