@@ -33,11 +33,10 @@ import javax.jms.Session;
  */
 public class TestActiveMQ {
     /**
-     * 使用配置文件创建得1
-     * @throws JmsException
+     * 使用配置文件创建得生产者
      */
     @Test
-    public void simpleUseTest() throws JmsException {
+    public void simpleUseProducerTest() throws JmsException {
         //初始化 spring 容器
         ClassPathXmlApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("spring/applicationContext-activemq.xml");
@@ -54,6 +53,24 @@ public class TestActiveMQ {
                         return session.createTextMessage("Hello activemq");
                     }
                 });
+    }
+    /**
+     * 使用配置文件创建得消费者
+     */
+    @Test
+    public void simpleUseConsumerTest() throws JmsException {
+        //初始化 spring 容器
+        ClassPathXmlApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("spring/applicationContext-activemq.xml");
+        //从 spring 容器中获得 JmsTemplate 对象
+        JmsTemplate jmsTemplate = applicationContext.getBean(JmsTemplate.class);
+        //从 spring 容器中取 Destination 对象
+        Destination destination = (Destination) applicationContext.getBean("queueDestination");
+        //使用 JmsTemplate 对象接收消息。
+        Message receive = jmsTemplate.receive(destination);
+        System.out.println("=================");
+        System.out.println(receive);
+        System.out.println("=================");
     }
 
 }
