@@ -41,6 +41,16 @@ http://www.springframework.org/schema/util/spring-util-4.2.xsd">
     </bean>
     <!--这个是主题目的地，一对多的 -->
     <bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
-        <constructor-arg value="topic" />
+        <constructor-arg value="item-change-topic" />
+    </bean>
+    <!-- 接收消息 -->
+    <!-- 配置监听器 -->
+    <bean id="myMessageListener" class="cn.indispensable.shopForSimple.search.listener.MyMessageListener" />
+    <bean id="itemChangeListener" class="cn.indispensable.shopForSimple.search.listener.ItemChangeListener"/>
+    <!-- 消息监听容器 -->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="destination" ref="topicDestination" />
+        <property name="messageListener" ref="itemChangeListener" />
     </bean>
 </beans>

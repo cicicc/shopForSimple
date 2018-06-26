@@ -1,5 +1,6 @@
 package cn.indispensable.shopForSimple.service.impl;
 
+
 import cn.indispensable.shopForSimple.common.pojo.EasyUIDataGridResult;
 import cn.indispensable.shopForSimple.common.utils.E3Result;
 import cn.indispensable.shopForSimple.common.utils.IDUtils;
@@ -11,9 +12,16 @@ import cn.indispensable.shopForSimple.pojo.TbItemExample;
 import cn.indispensable.shopForSimple.service.ItemService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import javax.jms.Destination;
 import javax.annotation.Resource;
+import javax.jms.JMSException;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +36,13 @@ public class ItemServiceImpl implements ItemService {
     @Resource
     private TbItemDescMapper itemDescMapper;
 
+    //下列两字段是关于ActiveMQ的字段
+    //注入jmsTemplate对象
+    @Autowired
+    private JmsTemplate jmsTemplate;
+    //注入目的的对象
+    @Resource
+    private Destination queueDestination;
     /**
      * 调用dao层根据商品id查询Tb_Item表
      * @param id 商品id
@@ -72,7 +87,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public E3Result saveItem(TbItem item, String desc) {
         //1、生成商品 id
-        long itemId = IDUtils.genItemId();
+        final long itemId = IDUtils.genItemId();
         //2、补全 TbItem 对象的属性 id
         item.setId(itemId);
         //1-正常，2-下架，3-删除
@@ -90,6 +105,16 @@ public class ItemServiceImpl implements ItemService {
         itemDesc.setUpdated(new Date());
         //6、向商品描述表插入数据
         itemDescMapper.insert(itemDesc);
+        //发送一个商品添加消息
+        jmsTemplate.send(
+                queueDestination, new MessageCreator() {
+
+                    @Override
+                    public javax.jms.Message createMessage(Session session) throws JMSException {
+                        return session.createTextMessage(itemId + "");
+                    }
+                }
+        );
         //7、调用E3Result.ok() 返回一个空参E3Result对象 表示插入成功
         return E3Result.ok();
     }

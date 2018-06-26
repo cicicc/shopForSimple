@@ -9,6 +9,7 @@
         <module name="shopForSimple-common" />
         <module name="shopForSimple-content-interface" />
         <module name="shopForSimple-content-service" />
+        <module name="shopForSimple-item-web" />
         <module name="shopForSimple-manager-dao" />
         <module name="shopForSimple-manager-interface" />
         <module name="shopForSimple-manager-pojo" />

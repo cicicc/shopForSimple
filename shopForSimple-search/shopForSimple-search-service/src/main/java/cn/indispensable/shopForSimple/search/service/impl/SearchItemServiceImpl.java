@@ -17,6 +17,11 @@ package cn.indispensable.shopForSimple.search.service.impl;
 
 import cn.indispensable.shopForSimple.common.pojo.SearchItem;
 import cn.indispensable.shopForSimple.common.utils.E3Result;
+import cn.indispensable.shopForSimple.dao.TbItemDescMapper;
+import cn.indispensable.shopForSimple.dao.TbItemMapper;
+import cn.indispensable.shopForSimple.pojo.TbItem;
+import cn.indispensable.shopForSimple.pojo.TbItemDesc;
+import cn.indispensable.shopForSimple.pojo.TbItemExample;
 import cn.indispensable.shopForSimple.search.mapper.SearchItemMapper;
 import cn.indispensable.shopForSimple.search.service.SearchItemService;
 import org.apache.solr.client.solrj.SolrServer;
@@ -41,9 +46,15 @@ public class SearchItemServiceImpl  implements SearchItemService {
     private SearchItemMapper searchItemMapper;
     @Autowired
     private SolrServer solrServer;
+    @Autowired
+    private TbItemMapper itemMapper;
+    @Autowired
+    private TbItemDescMapper itemDescMapper;
+
+
 
     /**
-     * 添加商品到索引库中去
+     * 一次性导入数据库中所有商品到索引库中去
      * @return 返回给页面的信息 表示数据存入索引库成功或者失败
      */
     @Override
@@ -75,5 +86,65 @@ public class SearchItemServiceImpl  implements SearchItemService {
         }
 
 
+    }
+
+    /**
+     * 根据商品id将商品添加到索引库中去
+     * @param itemId 商品ID
+     * @return 是否正确执行的E3Result对象
+     */
+    @Override
+    public E3Result addItemsTODocument(Long itemId) {
+        //1、根据商品 id 查询商品信息。
+        SearchItem searchItem = searchItemMapper.getItemById(itemId);
+        //2、创建一 SolrInputDocument 对象。
+        SolrInputDocument solrInputDocument = new SolrInputDocument();
+        //向文档中添加域
+        solrInputDocument.addField("id", searchItem.getId());
+        solrInputDocument.addField("item_title", searchItem.getTitle());
+        solrInputDocument.addField("item_sell_point", searchItem.getSell_point());
+        solrInputDocument.addField("item_price", searchItem.getPrice());
+        solrInputDocument.addField("item_image", searchItem.getImage());
+        solrInputDocument.addField("item_category_name", searchItem.getCategory_name());
+        //3、使用 SolrServer 对象写入索引库。
+        try {
+            solrServer.add(solrInputDocument);
+            //提交solrServer对象
+            solrServer.commit();
+        } catch (SolrServerException | IOException e) {
+            e.printStackTrace();
+            return E3Result.build(500, itemId + "添加到索引库中出错");
+        }
+
+        //4、返回成功，返回 e3Result。
+        //返回值：e3Result
+        return E3Result.ok();
+    }
+
+    /**
+     * 根据商品id查询商品的信息(不包括图片信息)
+     * @param id 商品id
+     * @return TbItem
+     */
+    @Override
+    public TbItem selectItemById(Long id) {
+        //TbItem tbItem = itemMapper.selectByPrimaryKey(id);
+        TbItemExample itemExample = new TbItemExample();
+        itemExample.createCriteria().andIdEqualTo(id);
+        List<TbItem> tbItems = itemMapper.selectByExample(itemExample);
+        if (tbItems != null && tbItems.size() > 0) {
+            return tbItems.get(0);
+        }
+        return null;
+    }
+
+    /**
+     * 根据商品id查询商品的详情信息
+     * @param id 商品id
+     * @return TbItemDesc
+     */
+    @Override
+    public TbItemDesc selectItemDescById(Long id) {
+        return itemDescMapper.selectByPrimaryKey(id);
     }
 }
