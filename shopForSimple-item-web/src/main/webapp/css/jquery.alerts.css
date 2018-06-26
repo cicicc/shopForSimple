@@ -2,7 +2,7 @@
 	font-family: Arial, sans-serif;
 	font-size: 12px;
 	min-width: 300px; /* Dialog will be no smaller than this */
-	max-width: 600px; /* Dialog will wrap after this width */	
+	max-width: 600px; /* Dialog will wrap after this width */
 	border:3px solid #E6E6E6;
 	color: #000;
 	-moz-border-radius: 5px;
@@ -27,9 +27,9 @@
 }
 
 #popup_message {
-    color: #6B6B6B;
-    margin: 0;
-    padding: 0;
+	color: #6B6B6B;
+	margin: 0;
+	padding: 0;
 	text-align:center
 }
 
