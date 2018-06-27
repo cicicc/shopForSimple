@@ -1,3 +1,5 @@
+package cn.indispensable.shopForSimple.manager.service.test;
+
 import cn.indispensable.shopForSimple.dao.TbItemMapper;
 import cn.indispensable.shopForSimple.pojo.TbItem;
 import cn.indispensable.shopForSimple.pojo.TbItemExample;
