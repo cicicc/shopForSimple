@@ -11,7 +11,7 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
 	<!--加载配置文件-->
-	<context:property-placeholder location="classpath:conf/resource.properties"/>
+	<context:property-placeholder location="classpath:conf/*.properties"/>
 	<!-- 配置包扫描器 -->
 	<context:component-scan base-package="cn.indispensable.shopForSimple.search.service"/>
 	<!-- 使用dubbo发布服务 -->

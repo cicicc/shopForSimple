@@ -19,11 +19,13 @@ http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <!--配置基础扫描包-->
     <context:component-scan base-package="cn.indispensable.shopForSimple.item.controller"/>
     <!--配置访问路径的前后缀-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp"/>
         <property name="suffix" value=".jsp"/>
-    </bean>
+    </bean>-->
     <!--引用dubbo的服务-->
-    <dubbo:application name="shopForSimple-portal-web"/>
+    <dubbo:application name="shopForSimple-item-web"/>
     <dubbo:registry protocol="zookeeper" address="192.168.25.134:2181"/>
+    <dubbo:reference interface="cn.indispensable.shopForSimple.search.service.SearchItemService" id="searchItemService"
+                     timeout="30000"/>
 </beans>

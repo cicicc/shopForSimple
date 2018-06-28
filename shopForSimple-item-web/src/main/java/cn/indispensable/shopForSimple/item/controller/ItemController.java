@@ -19,6 +19,7 @@ import cn.indispensable.shopForSimple.pojo.Item;
 import cn.indispensable.shopForSimple.pojo.TbItem;
 import cn.indispensable.shopForSimple.pojo.TbItemDesc;
 import cn.indispensable.shopForSimple.search.service.SearchItemService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ import javax.annotation.Resource;
  * @author cicicc
  * @since 1.0.0
  */
+@Controller
 public class ItemController {
     //注入service层对象
     @Resource

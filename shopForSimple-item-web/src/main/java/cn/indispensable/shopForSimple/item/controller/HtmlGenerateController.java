@@ -15,6 +15,7 @@
  */
 package cn.indispensable.shopForSimple.item.controller;
 
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class HtmlGenerateController {
 
     /**
      * 生成静态页面(页面的测试代码)
-     * @return
+     * @return 成功页面
      */
     @RequestMapping("/genhtml")
     @ResponseBody

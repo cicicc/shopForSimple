@@ -36,7 +36,7 @@ public class TestActiveMQ {
     /**
      * 使用配置文件创建得生产者
      */
-    @Test
+ /*   @Test
     public void simpleUseProducerTest() throws JmsException {
         //初始化 spring 容器
         ClassPathXmlApplicationContext applicationContext =
@@ -54,10 +54,11 @@ public class TestActiveMQ {
                         return session.createTextMessage("Hello activemq");
                     }
                 });
-    }
+    }*/
     /**
      * 使用配置文件创建得消费者
      */
+    /*
     @Test
     public void simpleUseConsumerTest() throws JmsException, IOException {
         //初始化 spring 容器
@@ -65,6 +66,6 @@ public class TestActiveMQ {
                 new ClassPathXmlApplicationContext("spring/applicationContext-activemq.xml");
         //等待生产者的信息
         System.in.read();
-    }
+    }*/
 
 }

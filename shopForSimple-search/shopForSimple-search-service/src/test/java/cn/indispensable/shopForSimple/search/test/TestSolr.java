@@ -41,7 +41,7 @@ public class TestSolr {
     @Before
     public void init(){
         //第一步：创建一个 SolrServer 对象。
-        solrServer = new HttpSolrServer("http://192.168.25.132:8080/solr");
+        solrServer = new HttpSolrServer("http://192.168.25.134:8080/solr");
     }
 
     /**
