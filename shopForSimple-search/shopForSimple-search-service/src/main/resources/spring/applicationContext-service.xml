@@ -11,7 +11,8 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
 	<!--加载配置文件-->
-	<context:property-placeholder location="classpath:conf/*.properties"/>
+	<context:property-placeholder location="classpath:conf/db.properties"/>
+	<context:property-placeholder location="classpath:conf/resource.properties"/>
 	<!-- 配置包扫描器 -->
 	<context:component-scan base-package="cn.indispensable.shopForSimple.search.service"/>
 	<!-- 使用dubbo发布服务 -->
@@ -19,7 +20,7 @@
 	<dubbo:application name="e3-search" />
 	<dubbo:registry protocol="zookeeper" address="192.168.25.134:2181" />
 	<!-- 用dubbo协议在20880端口暴露服务 -->
-	<dubbo:protocol name="dubbo" port="20882" />
+	<dubbo:protocol name="dubbo" port="20883" />
 	<!-- 声明需要暴露的服务接口 -->
 	<dubbo:service interface="cn.indispensable.shopForSimple.search.service.SearchItemService"
 				   ref="searchItemServiceImpl" timeout="30000"/>
