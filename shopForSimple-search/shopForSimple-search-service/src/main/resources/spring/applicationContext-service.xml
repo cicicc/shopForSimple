@@ -13,7 +13,7 @@
 	<!--加载配置文件-->
 	<context:property-placeholder location="classpath:conf/db.properties"/>
 	<context:property-placeholder location="classpath:conf/resource.properties"/>
-	<!-- 配置包扫描器 -->
+	<!-- 配置包扫描器-->
 	<context:component-scan base-package="cn.indispensable.shopForSimple.search.service"/>
 	<!-- 使用dubbo发布服务 -->
 	<!-- 提供方应用信息，用于计算依赖关系 -->
