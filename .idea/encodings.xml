@@ -18,5 +18,8 @@
     <file url="file://$PROJECT_DIR$/shopForSimple-search-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/shopForSimple-search/shopForSimple-search-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/shopForSimple-search/shopForSimple-search-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopForSimple-sso" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopForSimple-sso/shopForSimple-sso-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shopForSimple-sso/shopForSimple-sso-service" charset="UTF-8" />
   </component>
 </project>
