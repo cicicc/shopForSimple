@@ -17,6 +17,7 @@
         <module>shopForSimple-search-web</module>
         <module>shopForSimple-item-web</module>
         <module>shopForSimple-sso</module>
+        <module>shopForSimple-sso-web</module>
     </modules>
     <packaging>pom</packaging>
     <!-- 集中定义依赖版本号 -->
